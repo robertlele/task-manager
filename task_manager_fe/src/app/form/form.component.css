@@ -1,0 +1,13 @@
+mat-card-header {
+    margin-inline: auto;
+    margin-bottom: 1rem;
+}
+
+mat-card-actions {
+    margin: auto;
+}
+
+mat-card-content {
+    display: flex;
+    flex-direction: column;
+}
