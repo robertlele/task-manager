@@ -9,8 +9,9 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { task, date, priority } = req.body
-  const t = await addTask(task, date, priority)
+  console.log(req.body);
+  const { task, date, priority } = req.body;
+  const t = await addTask(task, date, priority);
   res.status(201).send(t);
 });
 

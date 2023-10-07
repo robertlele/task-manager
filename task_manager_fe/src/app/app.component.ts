@@ -13,6 +13,7 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
       this.apiService.getTasks().subscribe(data => {
         this.tasks = data;
-      })
+        console.log(data);
+      });
   }
 }

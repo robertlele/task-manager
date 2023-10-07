@@ -29,7 +29,7 @@ export async function getTask(id) {
 export async function addTask(task, date, priority) {
     const [result] = await pool.query(`
     INSERT INTO tasks (task, due, priority)
-    VALUES (?, ?, ?)
+    VALUES (?, STR_TO_DATE(?, '%Y-%m-%dT%H:%i:%s.000Z'), ?)
     `, [task, date, priority]);
     const id = result.insertId;
     return getTask(id);

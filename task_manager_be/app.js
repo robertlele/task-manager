@@ -12,7 +12,7 @@ app.use(express.json());
 app.use("/tasks", tasks);
 
 app.use((err, req, res, next) => {
-  console.errror(err.stack);
+  console.error(err.stack);
   res.status(500).send("Error! Something went wrong!");
 });
 
