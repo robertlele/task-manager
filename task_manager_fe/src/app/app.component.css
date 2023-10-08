@@ -4,7 +4,13 @@
     gap: 5rem;
     flex-wrap: wrap;
 }
-.flex-item {
+.flex-item-1 {
     /* border: 1px solid rgb(255, 14, 86); */
     margin: 1rem;
+    flex: 1;
+}
+.flex-item-2 {
+    /* border: 1px solid rgb(255, 14, 86); */
+    margin: 1rem;
+    flex: 4;
 }
