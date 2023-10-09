@@ -1,10 +1,20 @@
 import express from "express";
-import { getTasks, getTask, addTask, getTasksByPriority } from "./database.js";
+import { getTasks, getTask, addTask, getTasksByPriority, getTasksBySort, changeDone, deleteTask } from "./database.js";
 
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const tasks = await getTasks();
+  const { priority, sort, order } = req.query;
+  let tasks;
+  if (priority == "1" || priority == "2" || priority == "3") {
+    tasks = await getTasksByPriority(priority);
+  }
+  else if (sort != null && order != null) {
+    tasks = await getTasksBySort(sort, order);
+  }
+  else {
+    tasks = await getTasks();
+  }
   res.send(tasks);
 });
 
@@ -15,21 +25,23 @@ router.post("/", async (req, res) => {
   res.status(201).send(t);
 });
 
+router.post("/done/:id", async (req, res) => {
+  const id = req.params.id;
+  const { is_done } = req.body;
+  const t = await changeDone(id, is_done);
+  res.status(201).send(t);
+})
+
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  if (id == "low") {
-    const tasks = await getTasksByPriority("L");
-    res.send(tasks);
-  } else if (id == "mid") {
-    const tasks = await getTasksByPriority("M");
-    res.send(tasks);
-  } else if (id == "high") {
-    const tasks = await getTasksByPriority("H");
-    res.send(tasks);
-  } else {
-    const task = await getTask(id);
-    res.send(task);
-  }
+  const task = await getTask(id);
+  res.send(task);
 });
+
+router.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+  const r = await deleteTask(id);
+  res.send(r);
+})
 
 export default router;
