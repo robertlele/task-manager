@@ -52,7 +52,7 @@ export class FormComponent {
         datetime!.setHours(Number.parseInt(time[0]), Number.parseInt(time[1]));
       }
 
-      let priority = (this.taskForm.value.priority == '') ? null : this.taskForm.value.priority!;
+      let priority = (this.taskForm.value.priority == '') ? 0 : this.taskForm.value.priority!;
 
       let json = {
         task: this.taskForm.value.task,
